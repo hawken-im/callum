@@ -11,7 +11,7 @@ function SetTheme() {
       if (domHtml !== null) {
         domHtml.setAttribute('data-theme', theme)
       }else{
-        console.log('error find DOM "html" can not set theme')
+        console.log('error select HTML tag, can not set theme.')
       }
       
     }, [theme])
