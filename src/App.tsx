@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
+import SetTheme from './components/SetTheme';
+//import logo from './logo.svg';
 
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
           <div>Hawken</div>
           <div className="text-12 text-blue-400 ml-3 cursor-pointer">修改</div>
         </div>
+        <SetTheme />
       </div>
+      <button className="btn btn-primary">Post</button>
     </div>
   );
 }
