@@ -18,8 +18,8 @@ function SetTheme() {
     return (
       <label className="swap swap-rotate">
         <input onClick={toggleTheme} type="checkbox" />
-        <div className="swap-on">Go Dark</div>
-        <div className="swap-off">Light On</div>
+        <div className="swap-on">🌛 Go Dark</div>
+        <div className="swap-off">☀️ Light On</div>
       </label>
     )
   }

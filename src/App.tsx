@@ -1,5 +1,6 @@
 import React from 'react';
-import SetTheme from './components/SetTheme';
+import SetTheme from './components/SetTheme'
+import SendPost from './components/SendPost'
 //import logo from './logo.svg';
 
 
@@ -14,7 +15,7 @@ function App() {
         </div>
         <SetTheme />
       </div>
-      <button className="btn btn-primary">Post</button>
+      <SendPost />
     </div>
   );
 }

@@ -6,6 +6,10 @@
   @apply rounded-none;
 }
 
+.textarea {
+  @apply rounded-none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
