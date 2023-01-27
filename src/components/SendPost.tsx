@@ -1,9 +1,8 @@
 import React from 'react'
-
+import sendContent from '../utils/sendContent'
 
 function SendPost(){
     const [content, setContent] = React.useState('defaulst state')
-
 
     return(
         <div>
@@ -19,6 +18,7 @@ function SendPost(){
                 className="btn btn-primary"
                 onClick={()=>{
                     console.log('button clicked')
+                    sendContent(content)
                     }}>
                 Post
             </button>
