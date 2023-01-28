@@ -1,18 +1,20 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node index.js",
-    "start": "node index.js",
-    "reset": "node reset.js"
+    "start": "npm run server",
+    "server": "ts-node src/www.ts",
+    "build": " npm run build-ts",
+    "build-ts": "tsc"
   },
   "dependencies": {
+    "@commonify/lowdb": "^3.0.0",
     "@koa/cors": "^4.0.0",
     "http": "^0.0.1-security",
     "koa": "^2.14.1",
     "koa-bodyparser": "^4.3.0",
-    "koa-router": "^12.0.0"
+    "koa-router": "^12.0.0",
+    "typescript": "^4.9.3"
   }
 }
