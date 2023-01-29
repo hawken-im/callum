@@ -1,12 +1,12 @@
-import { User } from "./User"
+import { User } from './User.js';
 
 export class Question {
   static builder() {
     return new Builder();
-  };
-  id: String;
-  title: String;
-  content: String;
+  }
+  id: string;
+  title: string;
+  content: string;
   questioner: User | null;
   timeStamp = Date.now();
   constructor() {
@@ -18,24 +18,23 @@ export class Question {
 }
 
 class Builder {
-
   private question = new Question();
 
   build() {
     return this.question;
   }
 
-  id(id: String) {
+  id(id: string) {
     this.question.id = id;
     return this;
   }
 
-  title(title: String) {
+  title(title: string) {
     this.question.title = title;
     return this;
   }
 
-  content(content: String) {
+  content(content: string) {
     this.question.content = content;
     return this;
   }

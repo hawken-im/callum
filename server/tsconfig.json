@@ -1,22 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
     "module": "commonjs",
+    "lib": ["es6"],
     "allowJs": true,
-    "outDir": "./build",
-    "rootDir": "./src",
+    "outDir": "build",
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
+    "types": ["node", "jest"],
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "NodeNext"
   },
-  "exclude": [
-    "node_modules",
-    "build"
-  ],
-  "include": [
-    "*.ts",
-    "src/*.ts",
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.spec.ts"]
 }

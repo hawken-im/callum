@@ -1,3 +1,3 @@
-export * from './Question';
-export * from './Reply';
-export * from './User';
+export * from './Question.js';
+export * from './Reply.js';
+export * from './User.js';

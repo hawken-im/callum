@@ -1,9 +1,9 @@
-import { User } from "./User"
+import { User } from './User.js';
 export class Reply {
-  id: String;
+  id: string;
   replys: Reply[] | null;
   replyer: User | null;
-  content: String;
+  content: string;
 
   constructor() {
     this.id = '';
