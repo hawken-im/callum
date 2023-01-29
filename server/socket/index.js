@@ -10,7 +10,7 @@ const init = (server) => {
     }
   });
   io.on("connection", (socket) => {
-    socket.emit('connected', 'socket connected');
+    socket.emit('connected', 'socket connected!');
   });
 }
 
