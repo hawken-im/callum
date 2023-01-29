@@ -1,3 +1,3 @@
 module.exports = {
-  seedUrl: ''
+  seedUrl: 'rum://seed?v=1&e=0&n=0&b=HWo8emwmQWe7C2pdHy0rIg&c=gKlMEDrJzpgNoMmrRAIGsDUpGjytNslN8i58K3gqvV4&g=sag4PEZbSTiX_Srig6sMfg&k=AopCw3MuzG0rXFEp_rhoaydWIdtcQQPVclYsJvutu95c&s=xhRVeUiGXYUwBsFzBCuz5GvQz9LMcxC7O6AIfct5nJgtXMUWNKT7KHuqssKJbBv837kVFWIdPczrVAw8kv4-yAA&t=Fz62nN2NztM&a=CallumTest&y=group_timeline&u=http%3A%2F%2F103.61.39.166%3A6090%3Fjwt%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGxvd0dyb3VwcyI6WyJiMWE4MzgzYy00NjViLTQ5MzgtOTdmZC0yYWUyODNhYjBjN2UiXSwiZXhwIjoxODMyNjU2ODk3LCJuYW1lIjoiYWxsb3ctYjFhODM4M2MtNDY1Yi00OTM4LTk3ZmQtMmFlMjgzYWIwYzdlIiwicm9sZSI6Im5vZGUifQ.gLfM8pMhVbYCkwEdPILBXA5UWsv_6mkPEJiuYILmzKg'
 }
