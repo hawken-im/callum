@@ -4,18 +4,37 @@ import SendPost from './components/SendPost';
 import { newSocket } from './utils/socket';
 import store from 'store2';
 import { getConfig } from './apis';
-
+import { ethers } from 'ethers';
 //import logo from './logo.svg';
 
 
 function App() {
   useEffect(() => {
-    const config = getConfig.get();
-    console.log(`try to get config: ${config}`)
-    store('seedUrl', config);
     const socket = newSocket();
     socket.on('connected', msg => console.log(msg));
   });
+
+  useEffect(() => {
+    (async () => {
+      if (!store('address')) {
+        const wallet = ethers.Wallet.createRandom();
+        const password = "123";
+        const keystore = await wallet.encrypt(password, {
+          scrypt: {
+            N: 64
+          }
+        });
+        store('keystore', keystore.replaceAll('\\', ''));
+        store('password', password);
+        store('address', wallet.address);
+        store('privateKey', wallet.privateKey);
+      }
+      
+      const config = await getConfig();
+      console.log(`try to get seedUrl: ${config}`)
+      store('seedUrl', config);
+    })();
+  }, []);
   
   return (
     <div className="mt-10 w-[600px] mx-auto">

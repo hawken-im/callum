@@ -10,7 +10,8 @@ const views = require('koa-views');
 const Socket = require('./socket');
 //const pullContent = require('./handleContent');
 
-const trx = require('./routes/trx');
+//const trx = require('./routes/trx');
+const trx1 = require('./routes/trx1');
 
 //const post = require('./routes/post');
 //const comment = require('./routes/comment');
@@ -27,7 +28,8 @@ const {
 
 const app = new Koa();
 const port = 9000;
- 
+
+
 app.use(convert(bodyparser));
 app.use(convert(json()));
 app.use(cors({
@@ -44,8 +46,8 @@ router.all('(.*)', extendCtx);
 
 router.use('/favicon.ico', async (ctx) => ctx.body = true);
 router.use('/api/ping', async (ctx) => ctx.body = 'pong');
-router.use('/api/trx', trx.routes(), trx.allowedMethods());
-
+//router.use('/api/trx', trx.routes(), trx.allowedMethods());
+router.use('/api/trx', trx1.routes(), trx1.allowedMethods());
 //router.use('/api/posts', post.routes(), post.allowedMethods());
 //router.use('/api/comments', comment.routes(), comment.allowedMethods());
 // router.use('/api/profiles', profile.routes(), profile.allowedMethods());
@@ -66,6 +68,7 @@ server.listen(port, () => {
   console.log(`Node.js v${process.versions.node}`);
   console.log(`Server run at ${port}`);
   // setTimeout(() => {
-  //   pullContent(2000);
-  // }, 2000);
+  //   console.log(`temp is : ${JSON.stringify(temp)}`)
+  //   onChainTest(temp);
+  // }, 10000);
 });

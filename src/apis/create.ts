@@ -14,8 +14,10 @@ const createActivity = async (activity: IActivity)=>{
   });
   console.log(`create activity payload: ${payload}`);
 
-  axios.post(`${URL}/trx`, payload).then((res)=>{
-      return res.data.trx_id;
+  return axios.post(`${URL}/trx`, payload).then((res)=>{
+    console.log(`the raw data returned: ${JSON.stringify(res)}`)
+    console.log(`content posted on chain, trx_id: ${res.data.trx_id}`)
+    return `${res.data.trx_id}`;
   });
 };
 
