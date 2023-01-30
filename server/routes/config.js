@@ -4,7 +4,8 @@ const config = require('../config');
 router.get('/', get);
 
 async function get(ctx) {
-  ctx.body = config;
+  console.log(`what exactly is a config: ${config.seedUrl}`)
+  ctx.response.body = config.seedUrl;
 }
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import io, { Socket } from 'socket.io-client';
-import { URL_ORIGIN } from './env';
+import { URL_ORIGIN } from '../apis/env';
 
 let socket: Socket;
 

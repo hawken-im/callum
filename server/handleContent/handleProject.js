@@ -1,22 +1,29 @@
 const db = require('../utils/db');
 const SDK = require('rum-sdk-nodejs');
+//const { getSocketIo } = require('../socket');
 
 module.exports = async (item) => {
-  console.log('handle profile', item);
+  console.log('handle project data', item);
   await db.read();
   const {
     TrxId,
     Data: {
       object: {
-        name
+        id,
+        content,
       }
     },
     SenderPubkey,
+    TimeStamp,
   } = item;
-  db.data.profiles.unshift({
+  const post = {
     trxId: TrxId,
-    name,
+    id,
+    content,
     userAddress: SDK.utils.pubkeyToAddress(SenderPubkey),
-  });
+    timestamp: parseInt(String(TimeStamp / 1000000), 10)
+  };
+  db.data.posts.unshift(post);
   await db.write();
+//  getSocketIo().emit('post', post);
 }

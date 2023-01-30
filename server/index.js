@@ -8,17 +8,17 @@ const router = require('koa-router')();
 const serve = require('koa-static');
 const views = require('koa-views');
 const Socket = require('./socket');
-//const pollingContent = require('./pollingContent');
+//const pullContent = require('./handleContent');
 
 const trx = require('./routes/trx');
 
-// const post = require('./routes/post');
-// const comment = require('./routes/comment');
+//const post = require('./routes/post');
+//const comment = require('./routes/comment');
 // const profile = require('./routes/profile');
 // const like = require('./routes/like');
 // const content = require('./routes/content');
 // const summary = require('./routes/summary');
-// const config = require('./routes/config');
+const config = require('./routes/config');
 
 const {
   errorHandler,
@@ -46,13 +46,13 @@ router.use('/favicon.ico', async (ctx) => ctx.body = true);
 router.use('/api/ping', async (ctx) => ctx.body = 'pong');
 router.use('/api/trx', trx.routes(), trx.allowedMethods());
 
-// router.use('/api/posts', post.routes(), post.allowedMethods());
-// router.use('/api/comments', comment.routes(), comment.allowedMethods());
+//router.use('/api/posts', post.routes(), post.allowedMethods());
+//router.use('/api/comments', comment.routes(), comment.allowedMethods());
 // router.use('/api/profiles', profile.routes(), profile.allowedMethods());
 // router.use('/api/likes', like.routes(), like.allowedMethods());
 // router.use('/api/contents', content.routes(), content.allowedMethods());
 // router.use('/api/summary', summary.routes(), summary.allowedMethods());
-// router.use('/api/config', config.routes(), config.allowedMethods());
+router.use('/api/config', config.routes(), config.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 
@@ -66,6 +66,6 @@ server.listen(port, () => {
   console.log(`Node.js v${process.versions.node}`);
   console.log(`Server run at ${port}`);
   // setTimeout(() => {
-  //   pollingContent(2000);
+  //   pullContent(2000);
   // }, 2000);
 });

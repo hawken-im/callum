@@ -1,7 +1,7 @@
 module.exports = (item) => {
   const { type, object, result } = item.Data;
   if (type === 'Create' && object.type === 'Note' && !object.inreplyto) {
-    return 'post';
+    return 'project';
   }
   if (type === 'Create' && object.type === 'Note' && object.inreplyto) {
     return 'comment';

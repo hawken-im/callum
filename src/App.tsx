@@ -2,15 +2,21 @@ import React,{ useEffect } from 'react';
 import SetTheme from './components/SetTheme';
 import SendPost from './components/SendPost';
 import { newSocket } from './utils/socket';
+import store from 'store2';
+import { getConfig } from './apis';
+
 //import logo from './logo.svg';
 
 
 function App() {
   useEffect(() => {
-      const socket = newSocket();
-      socket.on('connected', msg => console.log(msg));
+    const config = getConfig.get();
+    console.log(`try to get config: ${config}`)
+    store('seedUrl', config);
+    const socket = newSocket();
+    socket.on('connected', msg => console.log(msg));
   });
-
+  
   return (
     <div className="mt-10 w-[600px] mx-auto">
       <div className="flex justify-between relative">

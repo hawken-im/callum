@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL } from './env';
+import { URL } from '../apis/env';
 //import { IActivity, ITrx, utils } from 'rum-sdk-browser';
 //import store from 'store2';
 

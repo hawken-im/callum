@@ -10,7 +10,7 @@ router.get('/:trxId', get);
 async function receiveContent(ctx) {
   const payload = ctx.request.body;
   assert(payload, Errors.ERR_IS_REQUIRED('payload'));
-  console.log(payload);
+  console.log(`content received: ${payload}`);
   ctx.response.body = 'success';
 }
 

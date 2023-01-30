@@ -1,15 +1,16 @@
 const SDK = require('rum-sdk-nodejs');
 const sleep = require('../utils/sleep');
-const handlePost = require('./handlePost');
-const handleComment = require('./handleComment');
-const handleLike = require('./handleLike');
-const handleProfile = require('./handleProfile');
-const handleDelete = require('./handleDelete');
-const handlePostEdit = require('./handlePostEdit');
+const handleProject = require('./handleProject');
+// const handleComment = require('./handleComment');
+// const handleLike = require('./handleLike');
+// const handleProfile = require('./handleProfile');
+// const handleDelete = require('./handleDelete');
+// const handlePostEdit = require('./handlePostEdit');
 const getTrxType = require('../utils/getTrxType');
 const db = require('../utils/db');
 const config = require('../config');
 const moment = require('moment');
+
 
 const LIMIT = 50;
 let startTrx;
@@ -37,7 +38,7 @@ module.exports = (duration) => {
         const contents = await SDK.chain.Content.list(listOptions);
         console.log(`${moment().format('HH:mm:ss')}, fetched, got ${contents.length} contents`);
         if (contents.length > 0) {
-          await handleContents(contents.sort((a, b) => a.TimeStamp - b.TimeStamp));
+          await pullContents(contents.sort((a, b) => a.TimeStamp - b.TimeStamp));
         }
       } catch (err) {
         console.log(err);
@@ -47,7 +48,7 @@ module.exports = (duration) => {
   })();
 }
 
-const handleContents = async (contents) => {
+const pullContents = async (contents) => {
   try {
     await db.read();
     for (const content of contents) {
@@ -58,12 +59,12 @@ const handleContents = async (contents) => {
         }
         const type = getTrxType(content);
         switch(type) {
-          case 'post': await handlePost(content); break;
-          case 'comment': await handleComment(content); break;
-          case 'like': await handleLike(content); break;
-          case 'profile': await handleProfile(content); break;
-          case 'delete': await handleDelete(content); break;
-          case 'edit': await handlePostEdit(content); break;
+          case 'project': await handleProject(content); break;
+          // case 'comment': await handleComment(content); break;
+          // case 'like': await handleLike(content); break;
+          // case 'profile': await handleProfile(content); break;
+          // case 'delete': await handleDelete(content); break;
+          // case 'edit': await handlePostEdit(content); break;
           default: console.log('unknown type'); console.log(content); break;
         }
         console.log(`${content.TrxId} ✅`);
