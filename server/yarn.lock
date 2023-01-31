@@ -4,14 +4,14 @@
 
 "@commonify/lowdb@^3.0.0":
   version "3.0.0"
-  resolved "https://registry.npmjs.org/@commonify/lowdb/-/lowdb-3.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@commonify/lowdb/-/lowdb-3.0.0.tgz#09c33ffd19057eab67440a1dc22847569407cafe"
   integrity sha512-GwZq68zStvMENxEzN6EE8pacgY2Rlrs5L00BpvB6NvpDW96JUxIa8PJXd9T7qIdx07ro0ITBtw6HfSJw/qboGw==
   dependencies:
     "@commonify/steno" "2.1.0"
 
 "@commonify/steno@2.1.0":
   version "2.1.0"
-  resolved "https://registry.npmjs.org/@commonify/steno/-/steno-2.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@commonify/steno/-/steno-2.1.0.tgz#7d1e68a0e239bf4fd35abfd167006a3e56140b28"
   integrity sha512-3W0LmYb84EU82Ky18M+D0tB33W66ccoC/Ot/8mm3uBQFuaTpiWaoxntQGBTL3+bIpV4e77ks53IE3sy9BRFBxA==
 
 "@ethersproject/abi@5.7.0", "@ethersproject/abi@^5.7.0":

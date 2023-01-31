@@ -24,4 +24,4 @@ function SetTheme() {
     )
   }
 
-  export default SetTheme
+export default SetTheme

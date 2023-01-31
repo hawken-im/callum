@@ -8,15 +8,12 @@ const handleProject = require('./handleProject');
 // const handlePostEdit = require('./handlePostEdit');
 const getTrxType = require('../utils/getTrxType');
 const db = require('../utils/db');
-const config = require('../config');
 const moment = require('moment');
 
 
 const LIMIT = 50;
 let startTrx;
 
-SDK.cache.Group.clear();
-SDK.cache.Group.add(config.seedUrl);
 
 module.exports = (duration) => {
   let stop = false;

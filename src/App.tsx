@@ -1,11 +1,11 @@
 import React,{ useEffect } from 'react';
 import SetTheme from './components/SetTheme';
 import SendPost from './components/SendPost';
+import ProjectList from './components/ProjectList';
 import { newSocket } from './utils/socket';
 import store from 'store2';
 import { getConfig } from './apis';
 import { ethers } from 'ethers';
-//import logo from './logo.svg';
 
 
 function App() {
@@ -31,7 +31,6 @@ function App() {
       }
       
       const config = await getConfig();
-      console.log(`try to get seedUrl: ${config}`)
       store('seedUrl', config);
     })();
   }, []);
@@ -47,6 +46,8 @@ function App() {
         <SetTheme />
       </div>
       <SendPost />
+      <div>Here comes the list:</div>
+      <ProjectList />
     </div>
   );
 }

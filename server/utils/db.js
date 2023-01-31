@@ -5,7 +5,7 @@ module.exports = db;
 (async () => {
   await db.read();
   db.data ||= {
-    posts: [],
+    projects: [],
     comments: [],
     likes: [],
     profiles: [],

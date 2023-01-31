@@ -27,7 +27,6 @@ function SendPost(){
                 className="textarea textarea-primary"
                 placeholder="How are you?"
                 onChange={(e)=>{
-                    console.log('onChange triggered')
                     setContent(e.target.value)
                     }}>
             </textarea>

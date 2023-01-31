@@ -16,14 +16,14 @@ module.exports = async (item) => {
     SenderPubkey,
     TimeStamp,
   } = item;
-  const post = {
+  const project = {
     trxId: TrxId,
     id,
     content,
     userAddress: SDK.utils.pubkeyToAddress(SenderPubkey),
     timestamp: parseInt(String(TimeStamp / 1000000), 10)
   };
-  db.data.posts.unshift(post);
+  db.data.projects.unshift(project);
   await db.write();
 //  getSocketIo().emit('post', post);
 }

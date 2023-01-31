@@ -6,15 +6,19 @@ router.post('/', receiveContent);
 
 router.get('/:trxId', get);
 
-// let tempPayload;
-
 async function receiveContent(ctx) {
   const payload = ctx.request.body;
   assert(payload, Errors.ERR_IS_REQUIRED('payload'));
-  console.log(`content received: ${JSON.stringify(payload)}`);
-  ctx.response.body = {
-    trx_id: `balbalblablalb`
-  };
+  console.log(`payload from frontend: ${JSON.stringify(payload)}`);
+  const group = SDK.cache.Group.list()[0];
+  assert(group, Errors.ERR_IS_REQUIRED('group'));
+  try {
+    const res = await SDK.chain.Trx.send(group.groupId, payload);
+    ctx.response.body = res;
+  } catch (err) {
+    console.log(err);
+    throws('ERR_IS_REQUEST_FAILED');
+  }
 }
 
 
