@@ -130,3 +130,4 @@ yarn-error.log*
 
 config.js
 server/config.js
+server/db.json
