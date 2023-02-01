@@ -34,7 +34,7 @@ function SendPost(){
                 className="btn btn-primary"
                 onClick={()=>{
                     console.log('button clicked')
-                    submitProject(content)
+                    submitProject(content.trim())
                     }}>
                 Post
             </button>
