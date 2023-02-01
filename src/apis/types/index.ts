@@ -1,4 +1,4 @@
-export * from './post';
+export * from './project';
 export * from './comment';
 export * from './profile';
 export * from './summary';

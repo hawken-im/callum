@@ -1,6 +1,6 @@
 const db = require('../utils/db');
 const SDK = require('rum-sdk-nodejs');
-//const { getSocketIo } = require('../socket');
+const { socketIo } = require('../socket');
 
 module.exports = async (item) => {
   console.log('handle project data', item);
@@ -25,5 +25,6 @@ module.exports = async (item) => {
   };
   db.data.projects.unshift(project);
   await db.write();
-//  getSocketIo().emit('post', post);
+  socketIo().emit('project', project);
+  console.log(`project handled: ${project.id}`)
 }

@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect, useState } from 'react';
 import SetTheme from './components/SetTheme';
 import SendPost from './components/SendPost';
 import ProjectList from './components/ProjectList';
@@ -9,9 +9,10 @@ import { ethers } from 'ethers';
 
 
 function App() {
+  const [socketOn, setSocketOn] =  useState(false)
   useEffect(() => {
     const socket = newSocket();
-    socket.on('connected', msg => console.log(msg));
+    socket.on('connected', msg => {console.log(msg);setSocketOn(true)});
   });
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function App() {
       </div>
       <SendPost />
       <div>Here comes the list:</div>
-      <ProjectList />
+      {socketOn ? <ProjectList /> : 'something wrong with socket'}
     </div>
   );
 }

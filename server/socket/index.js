@@ -16,5 +16,5 @@ const init = (server) => {
 
 module.exports = {
   init,
-  getSocketIo: () => io,
+  socketIo: () => io,
 };
