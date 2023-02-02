@@ -3,7 +3,7 @@ import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
 //import store from 'store2';
 import { createActivity } from '../apis';
-//import { TrxStorage } from '../apis/types';
+import { IProject, TrxStorage } from '../apis/types';
 
 const submitProject = async (content: string) => {
     const id = uuidv4();

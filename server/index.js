@@ -11,6 +11,7 @@ const Socket = require('./socket');
 const SDK = require('rum-sdk-nodejs');
 const config = require('./config');
 const pullContent = require('./handleContent');
+const handleProjectList = require('./handleContent/handleProjectList')
 
 const trx = require('./routes/trx');
 
@@ -66,6 +67,13 @@ app.on('error', function (err) {
 
 const server = http.createServer(app.callback());
 Socket.init(server);
+//console.log(`check project list: ${handleProjectList(100)}`)
+Socket.socketIo().on("connection", (socket) => {
+  socket.on('getInitProjects', async (maxNumber, response)=>{
+    console.log(`client required ${maxNumber} projects`);
+    response(await handleProjectList(maxNumber));
+  });
+});
 server.listen(port, () => {
   console.log(`Node.js v${process.versions.node}`);
   console.log(`Server run at ${port}`);

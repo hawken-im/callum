@@ -10,10 +10,8 @@ const getTrxType = require('../utils/getTrxType');
 const db = require('../utils/db');
 const moment = require('moment');
 
-
 const LIMIT = 50;
 let startTrx;
-
 
 module.exports = (duration) => {
   let stop = false;
