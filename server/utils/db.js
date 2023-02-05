@@ -10,6 +10,9 @@ module.exports = db;
     likes: [],
     profiles: [],
     contents: [],
+    questions:[],
+    answers:[],
+    replies:[]
   };
   await db.write();
 })();
