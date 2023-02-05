@@ -6,9 +6,9 @@ export interface IProject {
   id: string
   content: string
   userAddress: string
-  timestamp: number
+  timestamp?: number
   storage?: TrxStorage
-  extra: IProjectExtra
+  extra?: IProjectExtra
 }
 
 export interface IProjectExtra {
