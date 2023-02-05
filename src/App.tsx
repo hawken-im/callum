@@ -1,21 +1,16 @@
-import React,{ useEffect, useState } from 'react';
+import React,{ useEffect, useState, useRef } from 'react';
 import SetTheme from './components/SetTheme';
 import ProjectList from './components/ProjectList';
-import { newSocket } from './utils/socket';
+
 import store from 'store2';
 import { getConfig } from './apis';
 import { ethers } from 'ethers';
 
 
-function App() {
-  const [socketOn, setSocketOn] =  useState(false)
 
-  useEffect(() => {
-    if (!socketOn){
-      const socket = newSocket();
-      socket.on('connected', msg => {console.log(msg);setSocketOn(true)});
-    }
-  });
+
+
+function App() {
 
   useEffect(() => {
     (async () => {
@@ -31,12 +26,12 @@ function App() {
         store('password', password);
         store('address', wallet.address);
         store('privateKey', wallet.privateKey);
-      }
+      };
       if (!store('seedUrl')){
         const config = await getConfig();
         store('seedUrl', config);
-      }
-      console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
+        console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
+      };
     })();
   }, []);
   
@@ -50,9 +45,8 @@ function App() {
         </div>
         <SetTheme />
       </div>
-
-      <div>Here comes the list:</div>
-      {socketOn ? <ProjectList /> : 'something wrong with socket'}
+      <div className="divider"></div> 
+      <ProjectList />
     </div>
   );
 }

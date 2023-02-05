@@ -16,10 +16,11 @@ const submitProject = async (content: string) => {
       }
     });
     console.log(`submit project returned: ${trx_id}`);
+
 }
 
 function SendPost(){
-    const [content, setContent] = React.useState('defaulst state')
+    const [content, setContent] = React.useState('')
 
     return(
         <div>
@@ -36,7 +37,7 @@ function SendPost(){
                     console.log('button clicked')
                     submitProject(content.trim())
                     }}>
-                Post
+                Submit
             </button>
         </div>
     )

@@ -4,6 +4,16 @@ import { URL } from './env';
 import { IActivity, ITrx, utils } from 'rum-sdk-browser';
 import store from 'store2';
 
+// interface IProject {
+//   trxId: string
+//   id: string
+//   content: string
+//   userAddress: string
+//   timestamp: number
+//   storage?: TrxStorage
+//   extra: IProjectExtra
+// }
+
 const createActivity = async (activity: IActivity)=>{
   const group = utils.restoreSeedFromUrl(store('seedUrl'));
   const payload = await utils.signTrx({

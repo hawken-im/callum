@@ -12,6 +12,7 @@ async function receiveContent(ctx) {
   console.log(`payload from frontend: ${JSON.stringify(payload)}`);
   const group = SDK.cache.Group.list()[0];
   assert(group, Errors.ERR_IS_REQUIRED('group'));
+  
   try {
     const res = await SDK.chain.Trx.send(group.groupId, payload);
     ctx.response.body = res;
