@@ -18,4 +18,13 @@ module.exports = (item) => {
   if (type === 'Update' && object.type === 'Note' && result?.type === 'Note') {
     return 'edit';
   }
+  if(type === 'Create' && object.type === 'Question'){
+    return 'question';
+  }
+  if(type === 'Create' && object.type === 'Answer'){
+    return 'answer';
+  }
+  if(type === 'Create' && object.type === 'Reply'){
+    return 'reply';
+  }
 };

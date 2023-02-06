@@ -1,7 +1,6 @@
 config.js
-/server/config.js
-/server/db.json
-db.json
+server/config.js
+server/db.json
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
@@ -132,3 +131,4 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.vscode/settings.json

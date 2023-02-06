@@ -1709,6 +1709,11 @@ only@~0.0.2:
   resolved "https://registry.npmjs.org/only/-/only-0.0.2.tgz"
   integrity sha512-Fvw+Jemq5fjjyWz6CpKx6w9s7xxqo3+JCyM0WXWeCSOboZ8ABkyvP8ID4CZuChA/wxSx+XSJmdOm8rGVyJ1hdQ==
 
+param-validator.js@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.npmmirror.com/param-validator.js/-/param-validator.js-1.2.1.tgz#263e65a352a0d9289450de3e70b205066e58504e"
+  integrity sha512-+yYUwQvfb946fk/kI+mgUiwbSEBFDBd14x7Ru+mGwenj+U0MfoeRREvMhy4/1u0oXcQc0PANpXFsetdeAaKWRg==
+
 parseurl@^1.3.2:
   version "1.3.3"
   resolved "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz"
