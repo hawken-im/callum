@@ -14,6 +14,7 @@ const pullContent = require('./handleContent');
 const handleProjectList = require('./handleContent/handleProjectList')
 
 const trx = require('./routes/trx');
+const question = require('./routes/question');
 
 //const post = require('./routes/post');
 //const comment = require('./routes/comment');
@@ -51,6 +52,7 @@ router.all('(.*)', extendCtx);
 router.use('/favicon.ico', async (ctx) => ctx.body = true);
 router.use('/api/ping', async (ctx) => ctx.body = 'pong');
 router.use('/api/trx', trx.routes(), trx.allowedMethods());
+router.use('/api/question', question.routes(), question.allowedMethods());
 //router.use('/api/posts', post.routes(), post.allowedMethods());
 //router.use('/api/comments', comment.routes(), comment.allowedMethods());
 // router.use('/api/profiles', profile.routes(), profile.allowedMethods());
