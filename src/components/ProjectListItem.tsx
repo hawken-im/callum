@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
+import React from 'react';
+import SolutionList from './SolutionList';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IProject, TrxStorage } from '../apis/types'
 
@@ -11,11 +11,19 @@ interface props{
     // onDeletePost: () => void
 }
 
-const ProjectListItem = (props:props)=>{
+const ProjectListItem = (props:props)=>{//TODO: ProjectPage , details of a single project
     return (
-        <div>
-            <div className="divider">{props.project.storage}</div>
-            <div className="mb-12">content:{props.project.content}</div>
+        <div className='mt-12'>
+            <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100"> 
+                <input type="checkbox" className="peer" /> 
+                <div className="collapse-title text-xl peer-checked:text-xl">
+                    <div className="mb-4">Q:{props.project.content}</div>
+                </div>
+                <div>{props.project.storage}</div>
+                <div className="collapse-content"> 
+                    <SolutionList project={props.project}/>
+                </div>
+            </div>
         </div>
     );
 }

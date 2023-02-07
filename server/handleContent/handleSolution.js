@@ -1,27 +1,32 @@
+const db = require('../utils/db');
 const SDK = require('rum-sdk-nodejs');
 const { socketIo } = require('../socket');
 
-module.exports = async (db, item) => {
-  console.log('handle project data', item);
+module.exports = async (item) => {
+  console.log('handle solution data', item);
+  await db.read();
   const {
     TrxId,
     Data: {
       object: {
         id,
         content,
+        insolto,
       }
     },
     SenderPubkey,
     TimeStamp,
   } = item;
-  const project = {
+  const solution = {
     trxId: TrxId,
     id,
+    to:insolto,
     content,
     userAddress: SDK.utils.pubkeyToAddress(SenderPubkey),
     timestamp: parseInt(String(TimeStamp / 1000000), 10)
   };
-  db.data.projects.unshift(project);
-  socketIo().emit('project', project);
-  console.log(`project handled: ${project.id}`)
+  db.data.solutions.unshift(solution);
+  await db.write();
+  socketIo().emit('solution', solution);
+  console.log(`solution handled: ${solution.id}`)
 }

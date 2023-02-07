@@ -6,10 +6,14 @@ module.exports = db;
   await db.read();
   db.data ||= {
     projects: [],
+    solutions: [],
     comments: [],
     likes: [],
     profiles: [],
     contents: [],
+    questions:[],
+    answers:[],
+    replies:[]
   };
   await db.write();
 })();

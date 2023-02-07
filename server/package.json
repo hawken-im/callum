@@ -27,6 +27,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "nodemon": "^2.0.19",
+    "param-validator.js": "^1.2.0",
     "rum-sdk-nodejs": "^1.1.1",
     "socket.io": "^4.5.1"
   },
