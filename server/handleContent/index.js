@@ -9,30 +9,31 @@ const handleProject = require('./handleProject');
 const getTrxType = require('../utils/getTrxType');
 const db = require('../utils/db');
 const moment = require('moment');
-const handleQuestion = require('./handleQuestion');
 
 const LIMIT = 50;
-
+let startTrx;
 
 module.exports = (duration) => {
   let stop = false;
 
   (async () => {
+    await db.read();
+    startTrx = db.data.startTrx;
     while (!stop) {
-      await db.read();
       try {
         const group = SDK.cache.Group.list()[0];
         const listOptions = {
           groupId: group.groupId,
           count: LIMIT,
         };
-        if (db.data.startTrx) {
-          listOptions.startTrx = db.data.startTrx;
+        
+        if (startTrx) {
+          listOptions.startTrx = startTrx;
         }
         const contents = await SDK.chain.Content.list(listOptions);
         console.log(`${moment().format('HH:mm:ss')}, fetched, got ${contents.length} contents`);//这里的contents一直有数值需要注意
         if (contents.length > 0) {
-          await pullContents(db, contents.sort((a, b) => a.TimeStamp - b.TimeStamp));
+          await pullContents(contents.sort((a, b) => a.TimeStamp - b.TimeStamp));
         }
       } catch (err) {
         console.log(err);
@@ -42,9 +43,9 @@ module.exports = (duration) => {
   })();
 }
 
-const pullContents = async (db, contents) => {
+const pullContents = async (contents) => {
   try {
-    let startTrx;
+    await db.read();
     for (const content of contents) {
       try {
         const exist = db.data.contents.find(c => c.TrxId === content.TrxId);
@@ -52,22 +53,14 @@ const pullContents = async (db, contents) => {
           continue;
         }
         const type = getTrxType(content);
-        switch (type) {
-          case 'project':
-            await handleProject(db, content);
-            break;
-          case 'question':
-            handleQuestion(db, content);
-            break;
-            // case 'comment': await handleComment(content); break;
-            // case 'like': await handleLike(content); break;
-            // case 'profile': await handleProfile(content); break;
-            // case 'delete': await handleDelete(content); break;
-            // case 'edit': await handlePostEdit(content); break;
-          default:
-            console.log('unknown type');
-            console.log(content);
-            break;
+        switch(type) {
+          case 'project': await handleProject(content); break;
+          // case 'comment': await handleComment(content); break;
+          // case 'like': await handleLike(content); break;
+          // case 'profile': await handleProfile(content); break;
+          // case 'delete': await handleDelete(content); break;
+          // case 'edit': await handlePostEdit(content); break;
+          default: console.log('unknown type'); console.log(content); break;
         }
         console.log(`${content.TrxId} ✅`);
       } catch (err) {
@@ -76,10 +69,10 @@ const pullContents = async (db, contents) => {
         console.log(`${content.TrxId} ❌ ${err.message}`);
       }
       db.data.contents.unshift(content);
-      startTrx = content.TrxId;
+      db.data.startTrx = content.TrxId;
+      startTrx = db.data.startTrx;
+      await db.write();
     }
-    db.data.startTrx = startTrx;
-    await db.write();
   } catch (err) {
     console.log(err);
   }

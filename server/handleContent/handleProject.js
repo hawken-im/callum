@@ -1,8 +1,10 @@
+const db = require('../utils/db');
 const SDK = require('rum-sdk-nodejs');
 const { socketIo } = require('../socket');
 
-module.exports = async (db, item) => {
+module.exports = async (item) => {
   console.log('handle project data', item);
+  await db.read();
   const {
     TrxId,
     Data: {
@@ -22,6 +24,7 @@ module.exports = async (db, item) => {
     timestamp: parseInt(String(TimeStamp / 1000000), 10)
   };
   db.data.projects.unshift(project);
+  await db.write();
   socketIo().emit('project', project);
   console.log(`project handled: ${project.id}`)
 }
