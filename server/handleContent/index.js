@@ -1,7 +1,9 @@
 const SDK = require('rum-sdk-nodejs');
 const sleep = require('../utils/sleep');
 const handleProject = require('./handleProject');
-// const handleComment = require('./handleComment');
+const handleSolution = require('./handleSolution');
+const handleComment = require('./handleComment');
+// const handleVote = require('./handleVote');
 // const handleLike = require('./handleLike');
 // const handleProfile = require('./handleProfile');
 // const handleDelete = require('./handleDelete');
@@ -52,6 +54,7 @@ const pullContents = async (db, contents) => {
           continue;
         }
         const type = getTrxType(content);
+<<<<<<< Updated upstream
         switch (type) {
           case 'project':
             await handleProject(db, content);
@@ -68,6 +71,17 @@ const pullContents = async (db, contents) => {
             console.log('unknown type');
             console.log(content);
             break;
+=======
+        switch(type) {
+          case 'project': await handleProject(content); break;
+          case 'solution': await handleSolution(content); break;
+          case 'comment': await handleComment(content); break;
+          // case 'like': await handleLike(content); break;
+          // case 'profile': await handleProfile(content); break;
+          // case 'delete': await handleDelete(content); break;
+          // case 'edit': await handlePostEdit(content); break;
+          default: console.log('unknown type'); console.log(content); break;
+>>>>>>> Stashed changes
         }
         console.log(`${content.TrxId} ✅`);
       } catch (err) {
