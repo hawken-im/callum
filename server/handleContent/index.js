@@ -31,7 +31,7 @@ module.exports = (duration) => {
           listOptions.startTrx = startTrx;
         }
         const contents = await SDK.chain.Content.list(listOptions);
-        console.log(`${moment().format('HH:mm:ss')}, fetched, got ${contents.length} contents`);//这里的contents一直有数值需要注意
+        console.log(`${moment().format('HH:mm:ss')}, fetched, got ${contents.length} contents`);
         if (contents.length > 0) {
           await pullContents(contents.sort((a, b) => a.TimeStamp - b.TimeStamp));
         }
