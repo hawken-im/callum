@@ -8,7 +8,7 @@ const db = require('../utils/db');
 const getQuestionById = async function getQuestionById(trxId) {
   await db.read();
   return db.data.questions.find((item, index, arr) => {
-    return item.id == trxId;
+    return item.id === trxId;
   });
 }
 
