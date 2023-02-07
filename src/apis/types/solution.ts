@@ -1,20 +1,19 @@
 import { IProfile } from './profile';
 import { TrxStorage } from './TrxStorage';
 
-export interface IProject {
+export interface ISolution {
+  to: string
   trxId: string
   id: string
   content: string
   userAddress: string
   timestamp?: number
   storage?: TrxStorage
-  extra?: IProjectExtra
+  extra?: ISolutionExtra
 }
 
-export interface IProjectExtra {
+export interface ISolutionExtra {
   profile?: IProfile
   liked?: boolean
-  likeCount: number
-  solutionCount?: number
-  commentCount?: number
+  VoteCount: number
 }

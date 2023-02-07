@@ -1,4 +1,4 @@
-import React,{ useEffect, useState, useRef } from 'react';
+import React,{ useEffect } from 'react';
 import SetTheme from './components/SetTheme';
 import ProjectList from './components/ProjectList';
 
@@ -6,12 +6,7 @@ import store from 'store2';
 import { getConfig } from './apis';
 import { ethers } from 'ethers';
 
-
-
-
-
 function App() {
-
   useEffect(() => {
     (async () => {
       if (!store('address')) {
@@ -27,11 +22,11 @@ function App() {
         store('address', wallet.address);
         store('privateKey', wallet.privateKey);
       };
-      if (!store('seedUrl')){
-        const config = await getConfig();
-        store('seedUrl', config);
-        console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
-      };
+
+      const config = await getConfig();
+      store('seedUrl', config);
+      console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
+
     })();
   }, []);
   

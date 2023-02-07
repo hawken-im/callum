@@ -3,56 +3,7 @@ import { newSocket, socketIo } from '../utils/socket';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IProject, TrxStorage } from '../apis/types'
 import ProjectListItem from './ProjectListItem';
-import { createActivity } from '../apis';
-import { v4 as uuidv4 } from 'uuid';
-import store from 'store2'
-
-//发一个帖子 - 后端返回trxid - 发布成功，同步中... - 已同步
-function SendProject(props:{clientNewProject: (project: IProject) => void}){
-  const [content, setContent] = useState('');
-  const submitProject = async (content: string) => {
-    const id = uuidv4();
-    const trx_id = await createActivity({
-      type: 'Create',
-      object: {
-        type: "Note",
-        id,
-        content,
-      }
-    });
-    const newProject = {
-      content,
-      userAddress: store('address'),
-      trxId: trx_id,
-      id,
-      storage: TrxStorage.cache,
-    };
-  
-    console.log(`submit project returned: ${newProject.trxId}`);
-    props.clientNewProject(newProject);
-  }
-  return(//TODO:set hotkey command+enter or ctrl+enter :https://www.npmjs.com/package/hotkeys-js
-    <div className='relative'>
-      {false && <div className='absolute inset-0 bg-sky-500 z-50'></div>}
-      <textarea
-          className="textarea textarea-primary w-full"
-          placeholder="How are you?"
-          onChange={(e)=>{
-              setContent(e.target.value)
-              }}>
-      </textarea>
-
-      <button
-          className="btn btn-primary"
-          onClick={()=>{
-              submitProject(content.trim());
-              }}
-              >
-          Submit
-      </button>
-    </div>
-  );
-}
+import SendProject from './SendProject';
 
 function ProjectList() {
   const [projectMap, setProjectMap] = useState([] as IProject[]);
@@ -80,20 +31,19 @@ function ProjectList() {
   useEffect(() => {//triggered by server project emit.
     socketIo().on('project', (project: IProject) => {//onNewPost: server got a project, emit it immediately
       console.log(`Got a project: ${JSON.stringify(project)}`);
-
+      project.storage=TrxStorage.chain;
       mapRef.current.some((item,index,array)=>{
         if (item.id===project.id){
           console.log(`client project found ${JSON.stringify(item)}`);
-          item={...project,storage:TrxStorage.chain};
-          array[index]=item;
-          // item=project;
-          // item.storage=TrxStorage.chain;
+          array[index]=project;
           setProjectMap([...array]);
           return true;
+        }else{
+          console.log(`not local cached item`);
+          return false;
         }
-        console.log(`no cached item found`)
-        return false;
-      })
+      })? console.log(`done`)
+      : setProjectMap([project,...mapRef.current]);
 
       console.log(`${projectMap.length} in project map`);
       console.log(`${mapRef.current.length} in map ref `);
@@ -102,12 +52,12 @@ function ProjectList() {
       socketIo().off('project');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectMap]);
+  }, []);
 
   return (
     <div>
       <SendProject clientNewProject={clientNewProject} />
-      {projectMap.length === 0 ? `${projectMap.length}empty!` :
+      {projectMap.length === 0 ? `empty!` :
         projectMap.map((item) => 
            <ProjectListItem key={item.id} project={item}/>
       )}
