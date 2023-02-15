@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { newSocket, socketIo } from '../utils/socket';
+import { socketIo } from '../utils/socket';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IProject, ISolution, TrxStorage } from '../apis/types'
 import SolutionListItem from './SolutionListItem';
@@ -34,8 +34,8 @@ function SolutionList(props:props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {//TODO:尝试用room或者event广播来接收，还没有判断"to"的逻辑
-    socketIo().on('solution', (solution: ISolution) => {//onNewPost: server got a solution, emit it immediately
+  useEffect(() => {//socket get unique solution event with project id.
+    socketIo().on(`solution${props.project.id}`, (solution: ISolution) => {//onNewPost: server got a solution, emit it immediately
       console.log(`Got a solution: ${JSON.stringify(solution)}`);
       solution.storage=TrxStorage.chain;
       mapRef.current.some((item,index,array)=>{
@@ -55,7 +55,7 @@ function SolutionList(props:props) {
       console.log(`${mapRef.current.length} in map ref `);
     });
     return ()=> {
-      socketIo().off('solution');
+      socketIo().off(`solution${props.project.id}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

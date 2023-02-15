@@ -5,3 +5,5 @@ export * from './profile';
 export * from './summary';
 export * from './config';
 export * from './TrxStorage';
+export * from './vault';
+export * from './user';

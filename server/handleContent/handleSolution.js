@@ -11,7 +11,7 @@ module.exports = async (item) => {
       object: {
         id,
         content,
-        insolto,
+        inreplyto,
       }
     },
     SenderPubkey,
@@ -20,13 +20,14 @@ module.exports = async (item) => {
   const solution = {
     trxId: TrxId,
     id,
-    to:insolto,
+    to:inreplyto.id,
     content,
     userAddress: SDK.utils.pubkeyToAddress(SenderPubkey),
     timestamp: parseInt(String(TimeStamp / 1000000), 10)
   };
   db.data.solutions.unshift(solution);
   await db.write();
-  socketIo().emit('solution', solution);
+  //socketIo().emit('solution', solution);
+  socketIo().emit(`solution${solution.to}`, solution);
   console.log(`solution handled: ${solution.id}`)
 }

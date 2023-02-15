@@ -14,7 +14,10 @@ function SendSolution(props:{projectID:string,clientNewSolution: (solution: ISol
           type: "Note",
           id,
           content,
-          insolto: props.projectID,
+          inreplyto:{
+            type: "Solution",
+            id:props.projectID,
+          } 
         }
       });
       const newSolution = {

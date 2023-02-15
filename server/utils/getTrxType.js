@@ -1,12 +1,12 @@
 module.exports = (item) => {
   const { type, object, result } = item.Data;
-  if (type === 'Create' && object.type === 'Note' && !object.inreplyto && !object.insolto) {
+  if (type === 'Create' && object.type === 'Note' && !object.inreplyto) {
     return 'project';
   }
-  if (type === 'Create' && object.type === 'Note' && object.insolto) {
+  if (type === 'Create' && object.type === 'Note' && object.inreplyto.type ==='Solution') {
     return 'solution';
   }
-  if (type === 'Create' && object.type === 'Note' && object.inreplyto) {
+  if (type === 'Create' && object.type === 'Note' && object.inreplyto.type ==='Reply') {
     return 'comment';
   }
   if (type === 'Vote' || type === 'Unvote') {
