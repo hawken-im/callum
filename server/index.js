@@ -18,7 +18,7 @@ const trx = require('./routes/trx');
 
 //const post = require('./routes/post');
 //const comment = require('./routes/comment');
-// const profile = require('./routes/profile');
+const profile = require('./routes/profile');
 // const like = require('./routes/like');
 // const content = require('./routes/content');
 // const summary = require('./routes/summary');
@@ -54,7 +54,7 @@ router.use('/api/ping', async (ctx) => ctx.body = 'pong');
 router.use('/api/trx', trx.routes(), trx.allowedMethods());
 //router.use('/api/posts', post.routes(), post.allowedMethods());
 //router.use('/api/comments', comment.routes(), comment.allowedMethods());
-// router.use('/api/profiles', profile.routes(), profile.allowedMethods());
+router.use('/api/profiles', profile.routes(), profile.allowedMethods());
 // router.use('/api/likes', like.routes(), like.allowedMethods());
 // router.use('/api/contents', content.routes(), content.allowedMethods());
 // router.use('/api/summary', summary.routes(), summary.allowedMethods());

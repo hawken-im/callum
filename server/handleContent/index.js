@@ -5,7 +5,7 @@ const handleSolution = require('./handleSolution');
 const handleComment = require('./handleComment');
 // const handleVote = require('./handleVote');
 // const handleLike = require('./handleLike');
-// const handleProfile = require('./handleProfile');
+const handleProfile = require('./handleProfile');
 // const handleDelete = require('./handleDelete');
 // const handlePostEdit = require('./handlePostEdit');
 const getTrxType = require('../utils/getTrxType');
@@ -60,7 +60,7 @@ const pullContents = async (contents) => {
           case 'solution': await handleSolution(content); break;
           case 'comment': await handleComment(content); break;
           // case 'like': await handleLike(content); break;
-          // case 'profile': await handleProfile(content); break;
+          case 'profile': await handleProfile(content); break;
           // case 'delete': await handleDelete(content); break;
           // case 'edit': await handlePostEdit(content); break;
           default: console.log('unknown type'); console.log(content); break;

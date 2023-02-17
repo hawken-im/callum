@@ -3,7 +3,6 @@ import { createActivity } from '../apis';
 import { useStore } from '../store';
 import { ProfileApi, UserApi, VaultApi } from '../apis';
 
-import Query from '../utils/query';
 import * as Vault from '../utils/vault';
 import { isEmpty } from 'lodash';
 
@@ -20,20 +19,22 @@ import { ethers } from 'ethers';
 import * as JsBase64 from 'js-base64';
 import store from 'store2';
 
+import { useLocation } from 'react-router-dom';
 
+//TODO: 每次登录都要创造一个新的用户
 const Preload = () => {
   const { userStore } = useStore();
-  const token = Query.get('token');
-  const accessToken = Query.get('access_token');
+  const search = useLocation().search;
+  const token = new URLSearchParams(search).get('token');
+  const accessToken = new URLSearchParams(search).get('access_token');
+
   if (token) {
-    console.log({ token, accessToken });
-    Query.remove('access_token');
-    Query.remove('token');
+    console.log(`got two tokens: ${token} and ${accessToken}`);
   }
 
   React.useEffect(() => {
 
-    const handleToken = async (token: string, accessToken: string) => {
+    const handleToken = async (token: any, accessToken: any) => {
       const jwt = isJWT(token) ? token : await Vault.decryptByCryptoKey(token);
       const _accessToken = accessToken ? (isJWT(accessToken) ? accessToken : await Vault.decryptByCryptoKey(accessToken)) : '';
       Vault.removeCryptoKeyFromLocalStorage();
@@ -92,23 +93,27 @@ const Preload = () => {
           await handleToken(token, accessToken);
         }
         if (userStore.isLogin) {
-          const [profile, user] = await Promise.all([
-            ProfileApi.get(userStore.address),
-            UserApi.get(userStore.address, {
-              viewer: userStore.address
-            })
+          // const [profile, user] = await Promise.all([
+          //   ProfileApi.get(userStore.address),
+          //   UserApi.get(userStore.address, {
+          //     viewer: userStore.address
+          //   })
+          // ]);
+          const [profile] = await Promise.all([
+            ProfileApi.get(userStore.address)
           ]);
           if (isEmpty(userStore.profile)) {
             userStore.setProfile(profile);
           }
-          userStore.setUser(userStore.address, user);
+          //userStore.setUser(userStore.address, user);
+          console.log(`user logged in`)
         }
 
       } catch (err: any) {
         console.log(err);
       }
     })();
-  }, [accessToken, token, userStore]);
+  }, []);
 
   return null;
 };

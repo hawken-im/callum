@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import ErrorPage from './ErrorPage';
 import reportWebVitals from './reportWebVitals';
-
-
+import { StoreProvider } from './store';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
+import Ok from './Ok';
 
 
 const router = createBrowserRouter([
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement:<ErrorPage />
   },
+  {
+    path: "/ok",
+    element: <Ok />
+  }
 ]);
 
 const root = ReactDOM.createRoot(
@@ -26,7 +30,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <StoreProvider>
+      <RouterProvider router={router} />
+    </StoreProvider>
   </React.StrictMode>
 );
 

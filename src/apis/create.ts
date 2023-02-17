@@ -6,8 +6,6 @@ import { IActivity, ITrx, utils } from 'rum-sdk-browser';
 import store from 'store2';
 import { Store } from '../store';
 
-
-
 const createActivity = async (activity: IActivity, groupId?: string)=>{
   const group = utils.restoreSeedFromUrl(store('seedUrl'));
   const { userStore } = (window as any).store as Store;

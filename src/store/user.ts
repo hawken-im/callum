@@ -19,11 +19,16 @@ export function createUserStore() {
 
     profile: {} as IProfile,
 
+    // get address() {
+    //   return this._address || this.vaultAppUser.eth_address;
+    // },
     get address() {
-      return this._address || this.vaultAppUser.eth_address;
+      console.log(`let's see: vaultAddress: ${this.vaultAppUser.eth_address}`)
+      return this.vaultAppUser.eth_address;
     },
 
     get isLogin() {
+      console.log(`let's see: jwt:${!!this.jwt} or address:${!!this.address}`)
       return !!(this.jwt || this.address)
     },
 
