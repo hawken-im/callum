@@ -40,6 +40,6 @@ export const useStore = () => {
     throw new Error('You have forgot to use StoreProvider');
   }
   //(window as any).toJS = toJS;
-  (window as any).store = store;//TODO:替换成store2
+  //(window as any).store = store;//stop using window as any 
   return store as Store;
 };

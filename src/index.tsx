@@ -11,9 +11,15 @@ import {
 } from "react-router-dom";
 
 import Ok from './Ok';
+//import Preload from './preload';
 
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/?*",
+  //   element: <Preload />,
+  //   errorElement:<ErrorPage />
+  // },
   {
     path: "/",
     element: <App />,

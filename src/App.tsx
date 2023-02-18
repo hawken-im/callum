@@ -14,23 +14,15 @@ import Preload from './preload';
 function App() {
   const [loadingMixin, setLoadingMixin] = useState(false);
   const { userStore } = useStore();
+  const [loggedIn,setLoggedIn] = useState(userStore.isLogin);
+  
+  useEffect(()=>{
+    setLoggedIn(userStore.isLogin);
+  }, [userStore.isLogin])
 
   useEffect(() => {
+    //TODO: 写一个 navbar 然后用useState+useEffect让navbar可以根据登录情况进行变化
     (async () => {
-      // if (!store('address')) {
-      //   const wallet = ethers.Wallet.createRandom();
-      //   const password = "123";
-      //   const keystore = await wallet.encrypt(password, {
-      //     scrypt: {
-      //       N: 64
-      //     }
-      //   });
-      //   store('keystore', keystore.replaceAll('\\', ''));
-      //   store('password', password);
-      //   store('address', wallet.address);
-      //   store('privateKey', wallet.privateKey);
-      // };//TODO: try not init first
-
       const config = await getConfig();
       store('seedUrl', config);
       console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
@@ -72,16 +64,19 @@ function App() {
             Log Out
           </button>
         </div>
-        {userStore.isLogin && <Avatar
+        {loggedIn && <Avatar
           className="cursor-pointer"
           url={userStore.profile.avatar}
-          size={30}
+          size={60}
         />
         }
-        {userStore.isLogin && <div>
+        {loggedIn && <div>
           {userStore.profile.name}
         </div>
         }
+         <div>
+          user: {userStore.profile.name}
+        </div>
         <SetTheme />
       </div>
       <div className="divider"></div> 

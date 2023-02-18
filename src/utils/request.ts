@@ -1,13 +1,14 @@
 /* eslint-disable import/no-anonymous-default-export */
 import sleep from './sleep';
 import { URL } from '../apis/env';
+import store from 'store2'
 
 const BASE = '';
 export default async (url: any, options: any = {}) => {
   const hasEffectMethod = ['post', 'delete', 'put'].includes((options.method || '').toLocaleLowerCase());
   if (url.startsWith(URL)) {
     options.headers = {
-      'X-Address': (window as any).store.userStore.address || ''
+      'X-Address': store('address') || ''
     }
   }
   if (hasEffectMethod) {
@@ -41,9 +42,9 @@ export default async (url: any, options: any = {}) => {
   if (res.ok) {
     return resData;
   } else {
-    if (hasEffectMethod && res.status === 401) {
-      (window as any).store.modalStore.openLogin()
-    }
+    // if (hasEffectMethod && res.status === 401) {
+    //   (window as any).store.modalStore.openLogin()
+    // }
     throw Object.assign(new Error(), {
       code: resData.code,
       status: res.status,

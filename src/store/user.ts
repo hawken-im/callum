@@ -29,7 +29,7 @@ export function createUserStore() {
 
     get isLogin() {
       console.log(`let's see: jwt:${!!this.jwt} or address:${!!this.address}`)
-      return !!(this.jwt || this.address)
+      return (!!this.jwt || !!this.address)
     },
 
     get user() {
@@ -39,6 +39,7 @@ export function createUserStore() {
     setAddress(address: string) {
       this._address = address;
       store('address', address);
+      console.log(`setAddress called, address setted`)
     },
 
     setPrivateKey(privateKey: string) {
@@ -74,6 +75,7 @@ export function createUserStore() {
     setJwt(jwt: string) {
       this.jwt = jwt;
       store('jwt', jwt);
+      console.log(`setJwt called, jwt setted`);
     },
 
     setVaultAppUser(vaultAppUser: IVaultAppUser | null) {
