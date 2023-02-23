@@ -16,13 +16,12 @@ function ProjectList() {
   useEffect(() => {//initialization, try to ge 50 recent projects.
     newSocket().on('connected',(msg)=>{console.log(`socket init:${msg}`)});
     if (mapRef.current.length===0){//on component mounted, try to ge 50 recent projects.
-      console.log('socket emit from frontend!');
       socketIo().emit('getInitProjects',50,(response:[])=>{
         const newProjects:IProject[] =response;
         newProjects.forEach((item)=>{item.storage=TrxStorage.chain});
         setProjectMap(mapRef.current=newProjects);
         console.log(`${projectMap.length} in project map`);
-        console.log(`${mapRef.current.length} in map ref ${JSON.stringify(mapRef.current)}`);
+        console.log(`${mapRef.current.length} in map ref`);
       })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,11 +29,10 @@ function ProjectList() {
 
   useEffect(() => {//triggered by server project emit.
     socketIo().on('project', (project: IProject) => {//onNewPost: server got a project, emit it immediately
-      console.log(`Got a project: ${JSON.stringify(project)}`);
+      console.log(`Got a project: ${JSON.stringify(project.id)}`);
       project.storage=TrxStorage.chain;
       mapRef.current.some((item,index,array)=>{
         if (item.id===project.id){
-          console.log(`client project found ${JSON.stringify(item)}`);
           array[index]=project;
           setProjectMap([...array]);
           return true;

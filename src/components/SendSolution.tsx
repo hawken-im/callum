@@ -1,30 +1,26 @@
 import React,{useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import store from 'store2';
-import { createActivity } from '../apis';
+import { TrxApi } from '../apis';
 import { ISolution, TrxStorage } from '../apis/types';
 
 function SendSolution(props:{projectID:string,clientNewSolution: (solution: ISolution) => void}){
     const [content, setContent] = useState('');
     const submitSolution = async (content: string) => {
       const id = uuidv4();
-      const trx_id = await createActivity({
-        type: 'Create',
-        object: {
+      const trx_id = await TrxApi.createObject({
           type: "Note",
           id,
           content,
           inreplyto:{
-            type: "Solution",
-            id:props.projectID,
+            trxid:props.projectID,
           } 
-        }
       });
       const newSolution = {
         to:props.projectID,
         content,
         userAddress: store('address'),
-        trxId: trx_id,
+        trxId: trx_id.trx_id,
         id,
         storage: TrxStorage.cache,
       };
