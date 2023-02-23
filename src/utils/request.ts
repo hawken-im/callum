@@ -1,12 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import sleep from './sleep';
-import { URL } from '../apis/env';
+import { API_BASE_URL } from '../apis/env';
 import store from 'store2'
 
 const BASE = '';
 export default async (url: any, options: any = {}) => {
   const hasEffectMethod = ['post', 'delete', 'put'].includes((options.method || '').toLocaleLowerCase());
-  if (url.startsWith(URL)) {
+  if (url.startsWith(API_BASE_URL)) {
     options.headers = {
       'X-Address': store('address') || ''
     }

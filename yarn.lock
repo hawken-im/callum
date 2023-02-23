@@ -8280,6 +8280,24 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
+quorum-light-node-sdk@^0.1.37:
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/quorum-light-node-sdk/-/quorum-light-node-sdk-0.1.37.tgz#6d5a4f702d69cb922a384d328e9610cb75a62b78"
+  integrity sha512-/zIaF8QcQ1OoyQ8fHSaVx0SvwGSlPePFfnM6Wu7Zy04BqEp0oaTDqB9WSFaeTBu7oc7pLJLyEn79NdUh2b8AFA==
+  dependencies:
+    "@types/crypto-js" "^4.1.1"
+    "@types/node-localstorage" "^1.3.0"
+    "@types/uuid" "^8.3.4"
+    axios "^0.27.2"
+    crypto-js "^4.1.1"
+    ethereumjs-util "7.1.0"
+    ethers "^5.6.9"
+    js-base64 "^3.7.2"
+    node-localstorage "^2.2.1"
+    protobufjs "^6.11.3"
+    store2 "^2.13.2"
+    uuid "^8.3.2"
+
 raf@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"

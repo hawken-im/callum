@@ -4,22 +4,15 @@ import './index.css';
 import App from './App';
 import ErrorPage from './ErrorPage';
 import reportWebVitals from './reportWebVitals';
-import { StoreProvider } from './store';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
 import Ok from './Ok';
-//import Preload from './preload';
 
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/?*",
-  //   element: <Preload />,
-  //   errorElement:<ErrorPage />
-  // },
   {
     path: "/",
     element: <App />,
@@ -34,11 +27,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(
+root.render(//改写成example里的代码
   <React.StrictMode>
-    <StoreProvider>
       <RouterProvider router={router} />
-    </StoreProvider>
   </React.StrictMode>
 );
 
