@@ -1,20 +1,16 @@
-import { useEffect, useState, useContext } from 'react';
 import SetTheme from './SetTheme';
 import store from 'store2';
 import { useCurrentUserContext } from '../store';
 import * as Vault from '../utils/vault';
 
-
 function NavBar() {
   const {userMe} = useCurrentUserContext();
-  const userStore=userMe;
 
   return (
     <div className="flex justify-between relative">
       <div className="flex items-center text-gray-700 mb-2">
-        <img src={userStore.profile.avatar} alt="avatar" className="w-[32px] h-[32px] rounded-full mr-4" />
-        <div>Current User0: {userMe.profile.name}</div>
-        <div>Current User1: {userStore.profile.name}</div>
+        <img src={userMe.profile.avatar} alt="avatar" className="w-[32px] h-[32px] rounded-full mr-4" />
+        <div>Current User: {userMe.profile.name}</div>
         <div className="text-12 text-blue-400 ml-4 cursor-pointer">修改</div>
         <button
           className="btn btn-secondary"

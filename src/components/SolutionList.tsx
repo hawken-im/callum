@@ -22,13 +22,12 @@ function SolutionList(props:props) {
 
   useEffect(() => {//initialization, try to ge 50 recent solutions.
     if (mapRef.current.length===0){//on component mounted, try to ge 50 recent solutions.
-      console.log('socket emit from frontend!');
       socketIo().emit('getSolutions',50,props.project.id,(response:[])=>{
         const newSolutions:ISolution[] =response;
         newSolutions.forEach((item)=>{item.storage=TrxStorage.chain});
         setSolutionMap(mapRef.current=newSolutions);
         console.log(`${solutionMap.length} in solution map`);
-        console.log(`${mapRef.current.length} in map ref ${JSON.stringify(mapRef.current)}`);
+        console.log(`${mapRef.current.length} in map ref`);
       })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +39,6 @@ function SolutionList(props:props) {
       solution.storage=TrxStorage.chain;
       mapRef.current.some((item,index,array)=>{
         if (item.id===solution.id){
-          console.log(`client solution found ${JSON.stringify(item)}`);
           array[index]=solution;
           setSolutionMap([...array]);
           return true;

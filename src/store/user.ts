@@ -1,7 +1,7 @@
 import { IProfile, IUser, IVaultAppUser } from '../apis/types';
 import store from 'store2';
 
-export function createUserStore() {
+export default function createUserStore() {
   return {
     _address: store('address') || '',
 

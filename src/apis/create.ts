@@ -3,7 +3,8 @@ import request from '../utils/request'
 import { API_BASE_URL,VAULT_API_BASE_URL,VAULT_APP_ID } from './env';
 import { IObject, IPerson, ITrx, utils } from 'quorum-light-node-sdk';
 import store from 'store2';
-import { Store } from '../store';
+import { IVaultAppUser } from '../apis/types';
+
 
 interface IVaultOptions {
   ethPubKey: string
@@ -14,11 +15,11 @@ interface IVaultOptions {
 
 export default {
   createObject(object: IObject) {
-  return createTrx(object, '_Object');
+    return createTrx(object, '_Object');
   },
 
   createPerson(person: IPerson) {
-return createTrx(person, 'Person');
+    return createTrx(person, 'Person');
   },
 
   async get(trxId: string) {
@@ -29,18 +30,17 @@ return createTrx(person, 'Person');
 }
 
 async function createTrx(data: IObject | IPerson, type: '_Object' | 'Person') {
-  const {  userStore } = (window as any).store as Store;
   const group = utils.restoreSeedFromUrl(store('seedUrl'));
-  console.log(`any privateKey? ${userStore.privateKey}`)
+  //console.log(`any privateKey? ${userStore.privateKey}`)
   const payload = await utils.signTrx({
     type,
     data,
     groupId: group.group_id,
     aesKey: group.cipher_key,
     //version: configStore.config.version,
-    privateKey: userStore.privateKey,//这里用 Store，等下看看要使没有就删掉，没法用contex的话，干脆作为参数把jwt和eth pub key发来就好了
-    ...(userStore.jwt ? getVaultTrxCreateParam({
-      ethPubKey: userStore.vaultAppUser.eth_pub_key, jwt: userStore.jwt
+    //privateKey: userStore.privateKey,
+    ...(store('jwt') ? getVaultTrxCreateParam({
+      ethPubKey: getVaultAppUser().eth_pub_key, jwt: store('jwt')
     }) : {})
   });
   console.log(payload);
@@ -70,4 +70,8 @@ const getVaultTrxCreateParam = (vaultOptions: IVaultOptions) => {
       return res.signature.replace(/^0x/, '');
     },
   };
+}
+
+const getVaultAppUser = ()=>{
+  return store('vaultAppUser') as IVaultAppUser
 }

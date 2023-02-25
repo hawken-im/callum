@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import { useStore, StoreContext } from '../store';
-import { useCurrentUserContext } from '../store';
-import { createUserStore } from '../store/user'; 
+import { useState, useEffect, useContext } from 'react';
+import { useCurrentUserContext,createUserStore } from '../store';
 import { ProfileApi, VaultApi, getConfig,TrxApi } from '../apis';
 import * as Vault from '../utils/vault';
 import Base64 from '../utils/base64';
@@ -22,8 +20,10 @@ const Preload = () => {
 
   useEffect(() => {
     (async () => {
-      const config = await getConfig();
-      store('seedUrl', config);
+      if (!!!store('seedUrl')) {
+        const config = await getConfig();
+        store('seedUrl', config);
+      }
       console.log(`seedUrl stored: ${JSON.stringify(store('seedUrl'))}`)
     })();
   }, []);
@@ -107,15 +107,11 @@ const Preload = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-
-
   useEffect(() => {
     if(userStore.isLogin){
-
       searchParams.delete('access_token');
       searchParams.delete('token');
       setSearchParams(searchParams);
-
       console.log(`clean up searchParams`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
